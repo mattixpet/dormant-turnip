@@ -1,0 +1,11 @@
+{
+    // Characters and cards
+    "soldier": "data/images/characters/soldier/soldier.png",
+    "360noscope": "data/images/characters/soldier/cards/360noscope.png",
+    "frag_grenade": "data/images/characters/soldier/cards/frag_grenade.png",
+    "ump45": "data/images/characters/soldier/cards/ump45.png",
+
+    // Enemies
+    "lagavulin": "data/images/enemies/lagavulin.png",
+
+}
