@@ -9,5 +9,9 @@
     "hunker_down": "data/images/cards/soldier/hunker_down.png",
     "med_kit": "data/images/cards/soldier/med_kit.png",
 
-    "swagavulin": "data/images/enemies/swagavulin.png"
+    "swagavulin": "data/images/enemies/swagavulin.png",
+
+    "deck": "data/images/deck/deck.png",
+
+    "end_turn": "data/images/misc/end_turn.png"
 }

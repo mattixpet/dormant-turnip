@@ -2,30 +2,38 @@
 """
 
 import pygame as pg
+from entities.abstract.entity import Entity # only used for type hints
+from entities.characters.abstract.character import Character # only used for type hints
 
-def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.Group):
+def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.Group, entities: list[Entity]):
     """Mainloop
     """
     clock = pg.time.Clock()
+
+    end_turn = entities["end_turn"]
+    soldier = entities["soldier"]
+    swagavulin = entities["swagavulin"]
+    deck = entities["deck"]
 
     going = True
     while going:
         clock.tick(60)
 
-        # Handle Input Events (in the future this should be in a separate function/class)
+        # Handle Input Events and Logic (in the future this should be in a separate functions/classes)
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 going = False
             elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 going = False
             elif event.type == pg.MOUSEBUTTONDOWN:
-                if fist.punch(chimp):
-                    punch_sound.play()  # punch
-                    chimp.punched()
-                else:
-                    whiff_sound.play()  # miss
-            elif event.type == pg.MOUSEBUTTONUP:
-                fist.unpunch()
+                pos = pg.mouse.get_pos()
+
+                deck.use_card(pos, swagavulin)
+                deck.update_hand()
+
+                if end_turn.rect.collidepoint(pos):
+                    deck.new_turn()
+                    deck.update_hand()
 
         # Update
         allsprites.update()
@@ -33,4 +41,5 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
         # Draw Everything
         screen.blit(background, (0, 0))
         allsprites.draw(screen)
+        deck.draw_hand(screen)
         pg.display.flip()

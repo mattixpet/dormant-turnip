@@ -16,7 +16,6 @@ class Entity(pg.sprite.Sprite):
 
         self.pos = starting_pos # Set our position, default value top left
 
-
     def get_name(self):
         return self.name
 

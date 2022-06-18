@@ -9,7 +9,7 @@ class Swagavulin(Character):
     """
 
     def __init__(self):
-        Character.__init__(self, 'swagavulin', 0.6, (800,0), 150)
+        Character.__init__(self, 'swagavulin', 0.6, (860,10), 150)
 
         # List of things Swagavulin can do to the character
         self.actions = [
