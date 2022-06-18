@@ -2,8 +2,8 @@
 """
 
 import pygame as pg
-from entities.abstract.entity import Entity # only used for type hints
-from entities.characters.abstract.character import Character # only used for type hints
+from entities import Entity # only used for type hints
+from entities.characters import Character # only used for type hints
 
 def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.Group, entities: list[Entity]):
     """Mainloop

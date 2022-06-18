@@ -4,9 +4,9 @@ Contains discard pile, players hand and draw pile and exhausted (if we have that
 
 import random
 import pygame as pg
-from entities.abstract.entity import Entity
-from entities.characters.abstract.character import Character
-from entities.cards.abstract.card import Card # only for type hinting
+from entities import Entity
+from entities.characters import Character
+from entities.cards import Card # only for type hinting
 
 class Deck(Entity):
     """Deck
@@ -45,6 +45,8 @@ class Deck(Entity):
         Draws our current hand on the screen.
         """
         self.hand_sprites.draw(screen)
+        for card in self.hand:
+            card.draw_text(screen)
 
     def new_turn(self):
         """New turn

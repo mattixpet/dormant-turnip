@@ -2,7 +2,7 @@
 """
 
 import pygame as pg
-from entities.characters.abstract.character import Character
+from entities.characters import Character
 
 class Soldier(Character):
     """Soldier

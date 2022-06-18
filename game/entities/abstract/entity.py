@@ -16,6 +16,10 @@ class Entity(pg.sprite.Sprite):
 
         self.pos = starting_pos # Set our position, default value top left
 
+    def update(self):
+        # Move to new position
+        self.rect.topleft = self.pos
+
     def get_name(self):
         return self.name
 
@@ -24,7 +28,3 @@ class Entity(pg.sprite.Sprite):
 
     def set_pos(self, new_pos: tuple[int,int]):
         self.pos = new_pos
-
-    def update(self):
-        # Move to new position
-        self.rect.topleft = self.pos

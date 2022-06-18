@@ -3,7 +3,7 @@
 
 import random
 import pygame as pg # just for type hints
-from entities.characters.abstract.character import Character
+from entities.characters import Character
 
 class Swagavulin(Character):
     """Swagavulin

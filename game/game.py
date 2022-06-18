@@ -4,11 +4,9 @@
 import pygame as pg
 from tools.resources import load_image
 from mainloop import mainloop
-from entities.abstract.entity import Entity
-from entities.cards.abstract.card import Card
-from entities.characters.soldier import Soldier
-from entities.characters.swagavulin import Swagavulin
-from entities.deck import Deck
+from entities import Entity, Deck
+from entities.characters import Soldier, Swagavulin
+from entities.cards import FragGrenade
 
 if not pg.font:
     print("Warning, fonts disabled")
@@ -42,13 +40,13 @@ def start_game():
     pg.display.flip()
 
     # Prepare game objects
-    end_turn = Entity('end_turn', 0.6, (740,390))
+    end_turn = Entity('end_turn', 0.5, (800,400))
     you_win = Entity('you_win', 0.7, (370,50))
     soldier = Soldier()
     swagavulin = Swagavulin()
-    card = Card('frag_grenade', soldier, 150, True, 1)
-    card1 = Card('frag_grenade', soldier, 5, True, 1)
-    card2 = Card('frag_grenade', soldier, 5, True, 1)
+    card = FragGrenade(soldier)
+    card1 = FragGrenade(soldier)
+    card2 = FragGrenade(soldier)
     deck = Deck([card, card1, card2])
     allsprites = pg.sprite.RenderPlain((soldier, swagavulin, deck, end_turn))
 
