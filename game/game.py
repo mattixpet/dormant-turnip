@@ -2,6 +2,8 @@ import pygame as pg
 from tools.resources import load_image
 from mainloop import mainloop
 from entities.cards.abstract.card import Card
+from entities.characters.soldier import Soldier
+from entities.characters.swagavulin import Swagavulin
 
 if not pg.font:
     print("Warning, fonts disabled")
@@ -35,8 +37,10 @@ def start_game():
     pg.display.flip()
 
     # Prepare Game Objects
-    card = Card('frag_grenade', 5, 1)
-    allsprites = pg.sprite.RenderPlain((card))
+    soldier = Soldier()
+    swagavulin = Swagavulin()
+    card = Card('frag_grenade', soldier, 5, 1)
+    allsprites = pg.sprite.RenderPlain((soldier, swagavulin, card))
 
     # Start the game!
     mainloop(screen, background, allsprites)

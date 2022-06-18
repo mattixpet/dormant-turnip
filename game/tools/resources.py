@@ -18,7 +18,7 @@ def resource_to_path(key):
 
     return os.path.abspath(path)
 
-def load_image(name, colorkey=None, scale=1):
+def load_image(name: str, colorkey: int = None, scale: int = 1):
     fullname = resource_to_path(name)
     image = pg.image.load(fullname)
     image = image.convert()

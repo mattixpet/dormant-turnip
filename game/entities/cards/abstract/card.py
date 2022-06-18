@@ -10,9 +10,10 @@ class Card(Entity):
     """Card
     """
     
-    def __init__(self, name: str, damage: int = 0, mana_cost: int = 0):
-        Entity.__init__(self, name)
+    def __init__(self, name: str, character: Character, damage: int = 0, mana_cost: int = 0, scale: float = 0.2):
+        Entity.__init__(self, name, scale)
 
+        self.character = character # The character using this card
         self.targeted = True
         self.damage = damage
         self.mana_cost = mana_cost
@@ -22,6 +23,6 @@ class Card(Entity):
         Do everything the card does once on `target` enemy (or self). 
         Leave it to the user of the card to make sure to remove the card from the hand afterwards.
         """
-        target.damage(self.damage)
+        target.receive_damage(self.damage + self.character.get_strength())
 
 
