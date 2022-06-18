@@ -27,6 +27,7 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
             elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 going = False
             elif event.type == pg.MOUSEBUTTONDOWN:
+                # Game logic
                 pos = pg.mouse.get_pos()
 
                 deck.use_card(pos, swagavulin)
@@ -36,6 +37,8 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
                     allsprites.add(you_win)
 
                 if end_turn.rect.collidepoint(pos):
+                    swagavulin.perform_action(soldier) # swaga gets to hurt us now
+
                     deck.new_turn()
                     deck.update_hand()
 
@@ -46,4 +49,6 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
         screen.blit(background, (0, 0))
         deck.draw_hand(screen)
         allsprites.draw(screen)
+        swagavulin.draw_extras(screen)
+        soldier.draw_extras(screen)
         pg.display.flip()
