@@ -13,5 +13,6 @@
 
     "deck": "data/images/deck/deck.png",
 
-    "end_turn": "data/images/misc/end_turn.png"
+    "end_turn": "data/images/misc/end_turn.png",
+    "you_win": "data/images/misc/you_win.png"
 }

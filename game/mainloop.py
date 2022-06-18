@@ -1,4 +1,4 @@
-"""mainloop.py
+"""Mainloop
 """
 
 import pygame as pg
@@ -14,6 +14,7 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
     soldier = entities["soldier"]
     swagavulin = entities["swagavulin"]
     deck = entities["deck"]
+    you_win = entities["you_win"]
 
     going = True
     while going:
@@ -31,6 +32,9 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
                 deck.use_card(pos, swagavulin)
                 deck.update_hand()
 
+                if swagavulin.get_health() <= 0:
+                    allsprites.add(you_win)
+
                 if end_turn.rect.collidepoint(pos):
                     deck.new_turn()
                     deck.update_hand()
@@ -40,6 +44,6 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
 
         # Draw Everything
         screen.blit(background, (0, 0))
-        allsprites.draw(screen)
         deck.draw_hand(screen)
+        allsprites.draw(screen)
         pg.display.flip()

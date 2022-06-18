@@ -1,3 +1,6 @@
+"""Game
+"""
+
 import pygame as pg
 from tools.resources import load_image
 from mainloop import mainloop
@@ -40,9 +43,10 @@ def start_game():
 
     # Prepare game objects
     end_turn = Entity('end_turn', 0.6, (740,390))
+    you_win = Entity('you_win', 0.7, (370,50))
     soldier = Soldier()
     swagavulin = Swagavulin()
-    card = Card('frag_grenade', soldier, 5, True, 1)
+    card = Card('frag_grenade', soldier, 150, True, 1)
     card1 = Card('frag_grenade', soldier, 5, True, 1)
     card2 = Card('frag_grenade', soldier, 5, True, 1)
     deck = Deck([card, card1, card2])
@@ -52,7 +56,8 @@ def start_game():
         "end_turn": end_turn,
         "soldier": soldier,
         "swagavulin": swagavulin,
-        "deck": deck
+        "deck": deck,
+        "you_win": you_win
     }
 
     # Turn initialization logic

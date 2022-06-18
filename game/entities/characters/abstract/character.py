@@ -16,7 +16,10 @@ class Character(Entity):
     def receive_damage(self, amount: int):
         self.health -= amount
 
-    def get_strength(self, ) -> int:
+    def get_health(self) -> int:
+        return self.health
+
+    def get_strength(self) -> int:
         return self.strength
 
     def add_strength(self, amount: int) -> None:
