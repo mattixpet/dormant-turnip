@@ -1,15 +1,15 @@
-'''
+"""
 Functions to help with resources/loading/files/management I guess.. might be a better name out there
-'''
+"""
 import pygame as pg
 import os
 import json
 
 def resource_to_path(key):
-    '''
+    """
     Looks up data/json/resources.json with key and uses the value from there to create a full path to return.
-    '''
-    with open('data/json/resources.json') as r:
+    """
+    with open("data/json/resources.json") as r:
         data = json.load(r)
         path = data[key]
 
