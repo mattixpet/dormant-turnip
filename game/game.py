@@ -1,6 +1,7 @@
 import pygame as pg
 from tools.resources import load_image
 from mainloop import mainloop
+from entities.cards.abstract.card import Card
 
 if not pg.font:
     print("Warning, fonts disabled")
@@ -9,7 +10,7 @@ if not pg.mixer:
 
 def start_game():
     """Start game
-    Sets everything up and then starts the game.
+    Sets everything up and then starts the mainloop.
     """
 
     # Initialize Everything
@@ -34,12 +35,8 @@ def start_game():
     pg.display.flip()
 
     # Prepare Game Objects
-    #chimp = Chimp()
-    #fist = Fist()
-    #allsprites = pg.sprite.RenderPlain((fist, chimp))
-    allsprites = ''
-
-    #image, rect = load_image("soldier", -1, 1)
+    card = Card('frag_grenade', 5, 1)
+    allsprites = pg.sprite.RenderPlain((card))
 
     # Start the game!
     mainloop(screen, background, allsprites)

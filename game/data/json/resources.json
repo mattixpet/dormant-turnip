@@ -1,11 +1,13 @@
 {
-    // Characters and cards
     "soldier": "data/images/characters/soldier/soldier.png",
-    "360noscope": "data/images/characters/soldier/cards/360noscope.png",
-    "frag_grenade": "data/images/characters/soldier/cards/frag_grenade.png",
-    "ump45": "data/images/characters/soldier/cards/ump45.png",
 
-    // Enemies
-    "lagavulin": "data/images/enemies/lagavulin.png",
+    "360noscope": "data/images/cards/soldier/360noscope.png",
+    "frag_grenade": "data/images/cards/soldier/frag_grenade.png",
+    "ump45": "data/images/cards/soldier/ump45.png",
+    "flash_grenade": "data/images/cards/soldier/flash_grenade.png",
+    "riot_shield": "data/images/cards/soldier/riot_shield.png",
+    "hunker_down": "data/images/cards/soldier/hunker_down.png",
+    "med_kit": "data/images/cards/soldier/med_kit.png",
 
+    "lagavulin": "data/images/enemies/lagavulin.png"
 }

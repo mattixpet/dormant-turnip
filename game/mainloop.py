@@ -2,8 +2,9 @@
 """
 
 import pygame as pg
+from entities.abstract.entity import Entity # only used for type hints
 
-def mainloop(screen, background, allsprites):
+def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: list[Entity]):
     """Mainloop
     """
     clock = pg.time.Clock()
@@ -12,7 +13,7 @@ def mainloop(screen, background, allsprites):
     while going:
         clock.tick(60)
 
-        # Handle Input Events
+        # Handle Input Events (in the future this should be in a separate function/class)
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 going = False
@@ -27,9 +28,10 @@ def mainloop(screen, background, allsprites):
             elif event.type == pg.MOUSEBUTTONUP:
                 fist.unpunch()
 
-        #allsprites.update()
+        # Update
+        allsprites.update()
 
         # Draw Everything
         screen.blit(background, (0, 0))
-        #allsprites.draw(screen)
+        allsprites.draw(screen)
         pg.display.flip()

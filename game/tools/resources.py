@@ -8,9 +8,12 @@ import json
 def resource_to_path(key):
     """
     Looks up data/json/resources.json with key and uses the value from there to create a full path to return.
+
+    Note: This could be unneccessarily performance heavy since it opens the file each time it is called,
+    if the resources aren't too many we can read them all in and keep a table of the values in memory.
     """
-    with open("data/json/resources.json") as r:
-        data = json.load(r)
+    with open("data/json/resources.json") as resource_file:
+        data = json.load(resource_file)
         path = data[key]
 
     return os.path.abspath(path)
