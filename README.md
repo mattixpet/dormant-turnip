@@ -1,3 +1,6 @@
 # dormant-turnip
 
-Run `python game.py`
+Instructions:
+`pip install -r requirements.txt`
+`cd game`
+`python game.py`
