@@ -25,9 +25,6 @@ class Swagavulin(Character):
             '10 damage',
             '6x2 damage',
             '20 damage',
-            '10 damage',
-            '6x2 damage',
-            '20 damage',
             '10 damage'
         ]
 
