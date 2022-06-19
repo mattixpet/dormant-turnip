@@ -1,6 +1,7 @@
 """Character class
 """
 
+from tools.util import round_number
 from entities.abstract.entity import Entity
 
 class Character(Entity):
@@ -10,11 +11,25 @@ class Character(Entity):
         Entity.__init__(self, name, scale, pos)
 
         self.health = health
-
         self.strength = 0
+        self.temporary_buffs = [] # Buffs only valid for a turn
 
     def receive_damage(self, amount: int):
+        if 'hunker_down' in self.temporary_buffs:
+            amount = round_number(amount * 0.25) # you happy Tumi? Round ekki floor
         self.health -= amount
+
+    def new_turn(self):
+        """New turn
+        Called when turn ends. Reset our temporary buffs for example.
+        """
+        self.temporary_buffs = []
+
+    def add_buff(self, buff: str):
+        self.temporary_buffs.append(buff)
+
+    def get_buffs(self):
+        return self.temporary_buffs
 
     def get_health(self) -> int:
         return self.health

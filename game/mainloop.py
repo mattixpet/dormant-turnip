@@ -12,6 +12,7 @@ def end_turn(deck: Deck, enemy: Character, playing_character: Character):
     enemy.perform_action(playing_character) # enemy gets to hurt us now
     deck.new_turn()
     deck.update_hand()
+    playing_character.new_turn()
 
 def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.Group, entities: list[Entity]):
     """Mainloop

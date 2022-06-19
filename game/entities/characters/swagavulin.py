@@ -26,6 +26,7 @@ class Swagavulin(Character):
         ]
 
         self.current_action = random.choice(self.actions)
+        self.intent = self.current_action # this changes if cahracter is buffer for example
 
     def draw_extras(self, screen: pg.Surface):
         """Draw extras
@@ -40,7 +41,7 @@ class Swagavulin(Character):
             # Draw intent
             font = pg.font.Font(None, 48)
             color = (10,150,10) if self.current_action == 'debuff by 3' else (255,10,10)
-            display_text = "{action} incoming".format(action=self.current_action)
+            display_text = "{action} incoming".format(action=self.intent)
             if self.current_action == '***':
                 display_text = self.current_action
             text = font.render(display_text , True, color)
@@ -60,7 +61,8 @@ class Swagavulin(Character):
             case 'debuff by 3':
                 target.add_strength(-3)
             case '6x2 damage':
-                target.receive_damage(12)
+                target.receive_damage(6)
+                target.receive_damage(6)
             case '20 damage':
                 target.receive_damage(20)
             case '10 damage':
@@ -70,8 +72,8 @@ class Swagavulin(Character):
             case _:
                 pass # ???
 
-
         self.current_action = random.choice(self.actions)
+        self.intent = self.current_action
 
     def get_stunned(self):
         """Get stunned
@@ -80,3 +82,19 @@ class Swagavulin(Character):
         Note: This should probably be part of an "Enemy class" which inherits from Character.
         """
         self.current_action = '***'
+        self.intent = self.current_action
+
+    def notify_buff(self, buff: str):
+        """Notify buff
+        Let us know our opponent has a buff, which may impact our intent
+        """
+        if buff == 'hunker_down':
+            match self.current_action:
+                case 'debuff by 3':
+                    pass
+                case '6x2 damage':
+                    self.intent = '2x2 damage'
+                case '20 damage':
+                    self.intent = '5 damage'
+                case '10 damage':
+                    self.intent = '3 damage'
