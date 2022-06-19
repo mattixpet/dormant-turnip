@@ -44,18 +44,21 @@ def start_game():
     you_win = Entity('you_win', 0.7, (370,50))
     soldier = Soldier()
     swagavulin = Swagavulin()
-    deck = Deck([
-        FragGrenade(soldier),
-        FragGrenade(soldier),
-        FragGrenade(soldier),
-        FlashGrenade(soldier),
-        FlashGrenade(soldier)
-    ])
+    deck = Deck(
+        soldier,
+        [
+            FragGrenade(),
+            FragGrenade(),
+            FragGrenade(),
+            FlashGrenade(),
+            FlashGrenade()
+        ]
+    )
     allsprites = pg.sprite.RenderPlain((soldier, swagavulin, deck, end_turn_button))
 
     # 360noscope can end turn, so it needs the end turn function and it's arguments
     # and manual adding here after deck is created
-    noscope360 = NoScope360(soldier, end_turn, [deck, swagavulin, soldier])
+    noscope360 = NoScope360(end_turn, [deck, swagavulin, soldier])
     deck.add_card(noscope360)
 
     entities = {

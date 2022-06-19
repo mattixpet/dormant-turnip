@@ -10,10 +10,9 @@ from entities.characters import Character
 class Card(Entity):
     """Card
     """
-    def __init__(self, name: str, character: Character, damage: int = 0, mana_cost: int = 0, targeted: bool = True, scale: float = 0.2):
+    def __init__(self, name: str, damage: int = 0, mana_cost: int = 0, targeted: bool = True, scale: float = 0.2):
         Entity.__init__(self, name, scale)
 
-        self.character = character # The character using this card
         self.targeted = targeted
         self.damage = damage
         self.mana_cost = mana_cost
@@ -34,10 +33,10 @@ class Card(Entity):
             screen.blit(text, (self.text_pos[0], self.text_pos[1] + i*15))
             i += 1
 
-    def use(self, target: Character):
+    def use(self, user: Character, target: Character):
         """Use
-        Do everything the card does once on `target` enemy (or self). 
-        Leave it to the user of the card to make sure to remove the card from the hand afterwards.
+        Do everything the card does as `user` once on `target` enemy (or self). 
+        Leave it to whoever uses the class to make sure to remove the card from the hand afterwards.
         """
-        damage = self.damage + self.character.get_strength()
+        damage = self.damage + user.get_strength()
         target.receive_damage(max(damage, 0)) # can't deal negative damage, so we max(dmg,0)

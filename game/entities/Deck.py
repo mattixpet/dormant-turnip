@@ -11,9 +11,10 @@ from entities.cards import Card # only for type hinting
 class Deck(Entity):
     """Deck
     """
-    def __init__(self, cards: list[Card]):
+    def __init__(self, character: Character, cards: list[Card]):
         Entity.__init__(self, 'deck', 0.17, (30,330))
 
+        self.character = character # Character using this deck
         self.cards = cards.copy() # maintain a copy of our entire deck
 
         self.deck = cards
@@ -66,7 +67,7 @@ class Deck(Entity):
         """
         for card in self.hand:
             if card.rect.collidepoint(pos):
-                discard = card.use(target)
+                discard = card.use(self.character, target)
                 # this conditional is a dirty fix because 360 card can end turn
                 if (discard != 'dont discard'):
                     self._discard_card(card)
