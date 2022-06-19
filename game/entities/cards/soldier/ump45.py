@@ -12,6 +12,7 @@ class Ump45(Card):
     def __init__(self):
         Card.__init__(self, 'ump45', damage=20, mana_cost=1, targeted=True, scale=0.2)
 
+        self.title = "UMP45"
         self.text = """Damage: {dmg}
 Mana cost: {mana}""".format(dmg=self.damage, mana=self.mana_cost) 
 

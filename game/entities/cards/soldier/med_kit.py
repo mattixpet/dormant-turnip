@@ -11,6 +11,7 @@ class MedKit(Card):
     def __init__(self):
         Card.__init__(self, 'med_kit', damage=0, mana_cost=1, targeted=False, scale=0.15)
 
+        self.title = "Medical kit"
         self.text = """Heal damage taken
 last turn.
 Mana cost: {mana}""".format(mana=self.mana_cost) 

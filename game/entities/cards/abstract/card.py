@@ -18,21 +18,29 @@ class Card(Entity):
         self.damage = damage
         self.mana_cost = mana_cost
 
+        self.title = name
+        self.title_pos = self.rect.topleft # This is modified in self.update()
         self.text = "Damage: {dmg}\nMana cost: {mana}".format(dmg=self.damage, mana=self.mana_cost)
-        self.text_pos = (self.rect.bottomleft[0], self.rect.bottomleft[1]+10)
+        self.text_pos = self.rect.bottomleft # This is modified in self.update()
 
     def update(self):
         Entity.update(self)
         self.text_pos = (self.rect.bottomleft[0], self.rect.bottomleft[1]+10)
+        self.title_pos = (self.rect.topleft[0], self.rect.topleft[1]-20)
 
     def draw_text(self, screen: pg.Surface):
         lines = self.text.split('\n')
         font = pg.font.Font(None, 24)
+        # Draw descriptive text
         i = 0
         for line in lines:
             text = font.render(line, True, (10, 10, 10))
             screen.blit(text, (self.text_pos[0], self.text_pos[1] + i*15))
             i += 1
+        # Draw title
+        text = font.render(self.title, True, (10, 10, 10))
+        screen.blit(text, self.title_pos)
+
 
     def use(self, user: Character, target: Character):
         """Use

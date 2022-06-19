@@ -12,6 +12,7 @@ class HunkerDown(Card):
     def __init__(self):
         Card.__init__(self, 'hunker_down', damage=0, mana_cost=2, targeted=False, scale=1)
 
+        self.title = "Hunker down"
         self.text = """Block incoming
 damage by 75%.
 Reduce damage

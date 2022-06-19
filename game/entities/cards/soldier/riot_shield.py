@@ -13,6 +13,7 @@ class RiotShield(Card):
 
         self.block = 7
 
+        self.title = "Riot shield"
         self.text = """Block for {block}.
 Mana cost: {mana}""".format(block=self.block, mana=self.mana_cost) 
 

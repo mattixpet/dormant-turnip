@@ -10,6 +10,7 @@ class FlashGrenade(Card):
     def __init__(self):
         Card.__init__(self, 'flash_grenade', damage=0, mana_cost=2, targeted=True, scale=0.2)
 
+        self.title = "Flash grenade"
         self.text = """Stuns enemy for 1 
             turn.
 Mana cost: {mana}""".format(mana=self.mana_cost) 

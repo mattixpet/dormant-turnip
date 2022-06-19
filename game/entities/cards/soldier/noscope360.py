@@ -11,6 +11,8 @@ class NoScope360(Card):
     def __init__(self, end_turn_callback: callable, end_turn_callback_args: list):
         Card.__init__(self, '360noscope', damage=5, mana_cost=2, targeted=True, scale=0.5)
 
+        self.title = "360 Memes"
+
         self.end_turn_callback = end_turn_callback
         self.end_turn_callback_args = end_turn_callback_args
 
