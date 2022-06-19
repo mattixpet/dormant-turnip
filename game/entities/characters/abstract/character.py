@@ -26,7 +26,9 @@ class Character(Entity):
         if 'hunker_down' in self.temporary_buffs:
             amount = round_number(amount * 0.25) # you happy Tumi? Round ekki floor
         if 'block' in self.temporary_buffs:
-            amount = max(0, amount - self.block) # can't heal from block, so we max(0,..)
+            block = self.block # store our block value temporarily
+            self.block -= amount # update our block to be reduced
+            amount = max(0, amount - block) # can't heal from block, so we max(0,..)
         self.health -= amount
         self.health_lost_this_turn += amount
 
