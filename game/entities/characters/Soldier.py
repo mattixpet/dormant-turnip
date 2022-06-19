@@ -8,7 +8,7 @@ class Soldier(Character):
     """Soldier
     """
     def __init__(self):
-        Character.__init__(self, 'soldier', 0.1, (200,270), 100)
+        Character.__init__(self, 'soldier', scale=0.1, pos=(200,270), health=100)
 
         self.health_pos = (210,170)
         self.strength_pos = (self.health_pos[0], self.health_pos[1]+25)

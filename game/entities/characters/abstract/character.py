@@ -75,6 +75,9 @@ class Character(Entity):
         self.mana -= amount
         return True
 
+    def is_dead(self) -> bool:
+        return self.health <= 0
+
     def get_damage_last_turn(self):
         return self.health_lost_last_turn
 

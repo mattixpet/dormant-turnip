@@ -5,11 +5,15 @@ import pygame as pg
 from entities import Entity, Deck # only used for type hints
 from entities.characters import Character # only used for type hints
 
-def end_turn(deck: Deck, enemy: Character, playing_character: Character):
+def end_turn(deck: Deck, enemy: Character, playing_character: Character, character_dead: pg.Surface, allsprites: pg.sprite.Group):
     """End turn
     Function to do logic at end of turn. To be used as callback from cards which end turn (360 noscope)
     """
     enemy.perform_action(playing_character) # enemy gets to hurt us now
+
+    if playing_character.is_dead():
+        allsprites.add(character_dead)
+
     deck.new_turn()
     deck.update_hand()
     playing_character.new_turn()
@@ -24,6 +28,7 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
     swagavulin = entities["swagavulin"]
     deck = entities["deck"]
     you_win = entities["you_win"]
+    character_dead = entities["character_dead"]
 
     going = True
     while going:
@@ -36,6 +41,10 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
             elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 going = False
             elif event.type == pg.MOUSEBUTTONDOWN:
+                # Disable clicking when player is dead
+                if soldier.is_dead():
+                    continue
+
                 # Game logic
                 pos = pg.mouse.get_pos()
 
@@ -46,7 +55,7 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
                     allsprites.add(you_win)
 
                 if end_turn_button.rect.collidepoint(pos):
-                    end_turn(deck, enemy=swagavulin, playing_character=soldier)
+                    end_turn(deck, enemy=swagavulin, playing_character=soldier, character_dead=character_dead, allsprites=allsprites)
 
         # Update
         allsprites.update()

@@ -42,6 +42,7 @@ def start_game():
     # Prepare game objects
     end_turn_button = Entity('end_turn', 0.5, (800,400))
     you_win = Entity('you_win', 0.7, (370,50))
+    character_dead = Entity('character_dead', 0.9, (300,30))
     soldier = Soldier()
     swagavulin = Swagavulin()
     deck = Deck(
@@ -60,20 +61,22 @@ def start_game():
             Ump45()
         ]
     )
+
+    allsprites = pg.sprite.RenderPlain((soldier, swagavulin, deck, end_turn_button))
+
     # 360noscope can end turn, so it needs the end turn function and it's arguments
     # and manual adding here after deck is created
     deck.add_card(
-        NoScope360(end_turn, [deck, swagavulin, soldier])
+        NoScope360(end_turn, [deck, swagavulin, soldier, character_dead, allsprites])
     )
-
-    allsprites = pg.sprite.RenderPlain((soldier, swagavulin, deck, end_turn_button))
 
     entities = {
         "end_turn_button": end_turn_button,
         "soldier": soldier,
         "swagavulin": swagavulin,
         "deck": deck,
-        "you_win": you_win
+        "you_win": you_win,
+        "character_dead": character_dead
     }
 
     # Turn initialization logic
