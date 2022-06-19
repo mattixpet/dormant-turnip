@@ -3,10 +3,10 @@
 
 import pygame as pg
 from tools.resources import load_image
-from mainloop import mainloop
+from mainloop import mainloop, end_turn
 from entities import Entity, Deck
 from entities.characters import Soldier, Swagavulin
-from entities.cards import FragGrenade
+from entities.cards import FragGrenade, NoScope360
 
 if not pg.font:
     print("Warning, fonts disabled")
@@ -40,18 +40,24 @@ def start_game():
     pg.display.flip()
 
     # Prepare game objects
-    end_turn = Entity('end_turn', 0.5, (800,400))
+    end_turn_button = Entity('end_turn', 0.5, (800,400))
     you_win = Entity('you_win', 0.7, (370,50))
     soldier = Soldier()
     swagavulin = Swagavulin()
-    card = FragGrenade(soldier)
-    card1 = FragGrenade(soldier)
-    card2 = FragGrenade(soldier)
-    deck = Deck([card, card1, card2])
-    allsprites = pg.sprite.RenderPlain((soldier, swagavulin, deck, end_turn))
+    deck = Deck([
+        FragGrenade(soldier),
+        FragGrenade(soldier),
+        FragGrenade(soldier)
+    ])
+    allsprites = pg.sprite.RenderPlain((soldier, swagavulin, deck, end_turn_button))
+
+    # 360noscope can end turn, so it needs the end turn function and it's arguments
+    # and manual adding here after deck is created
+    noscope360 = NoScope360(soldier, end_turn, [deck, swagavulin, soldier])
+    deck.add_card(noscope360)
 
     entities = {
-        "end_turn": end_turn,
+        "end_turn_button": end_turn_button,
         "soldier": soldier,
         "swagavulin": swagavulin,
         "deck": deck,

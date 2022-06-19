@@ -50,12 +50,12 @@ class Deck(Entity):
 
     def new_turn(self):
         """New turn
-        Discard our hand and draw up to `self.handsize`
+        Discard our hand and draw up to `self.handsize` or our decksize if it's less than `self.handsize`
         """
         while self.hand != []:
             self.discard.append(self.hand.pop())
 
-        for i in range(self.handsize):
+        for i in range(min(len(self.cards), self.handsize)):
             self._draw_card()
 
     def use_card(self, pos: tuple[int,int], target: Character):
@@ -64,8 +64,14 @@ class Deck(Entity):
         """
         for card in self.hand:
             if card.rect.collidepoint(pos):
-                card.use(target)
-                self._discard_card(card)
+                discard = card.use(target)
+                if (discard != 'dont discard'):
+                    self._discard_card(card)
+
+    def add_card(self, card: Card):
+        """Add card
+        """
+        self.deck.append(card)
 
     def _draw_card(self):
         """Draw card

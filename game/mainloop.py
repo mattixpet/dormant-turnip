@@ -2,15 +2,23 @@
 """
 
 import pygame as pg
-from entities import Entity # only used for type hints
+from entities import Entity, Deck # only used for type hints
 from entities.characters import Character # only used for type hints
+
+def end_turn(deck: Deck, enemy: Character, playing_character: Character):
+    """End turn
+    Function to do logic at end of turn. To be used as callback from cards which end turn (360 noscope)
+    """
+    enemy.perform_action(playing_character) # enemy gets to hurt us now
+    deck.new_turn()
+    deck.update_hand()
 
 def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.Group, entities: list[Entity]):
     """Mainloop
     """
     clock = pg.time.Clock()
 
-    end_turn = entities["end_turn"]
+    end_turn_button = entities["end_turn_button"]
     soldier = entities["soldier"]
     swagavulin = entities["swagavulin"]
     deck = entities["deck"]
@@ -36,11 +44,8 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
                 if swagavulin.get_health() <= 0:
                     allsprites.add(you_win)
 
-                if end_turn.rect.collidepoint(pos):
-                    swagavulin.perform_action(soldier) # swaga gets to hurt us now
-
-                    deck.new_turn()
-                    deck.update_hand()
+                if end_turn_button.rect.collidepoint(pos):
+                    end_turn(deck, enemy=swagavulin, playing_character=soldier)
 
         # Update
         allsprites.update()

@@ -1,4 +1,4 @@
-"""Frag grenade class
+"""Frag grenade
 """
 
 from entities.cards import Card
@@ -8,7 +8,7 @@ class FragGrenade(Card):
     """Frag grenade
     """
     def __init__(self, character: Character):
-        Card.__init__(self, 'frag_grenade', character, damage=5, mana_cost=1, targeted=True, scale=0.2)
+        Card.__init__(self, 'frag_grenade', character, damage=7, mana_cost=1, targeted=True, scale=0.2)
 
         self.text = """Damage to all: {dmg}
         Mana cost: {mana}""".format(dmg=self.damage, mana=self.mana_cost) 
