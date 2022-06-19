@@ -6,7 +6,7 @@ from tools.resources import load_image
 from mainloop import mainloop, end_turn
 from entities import Entity, Deck
 from entities.characters import Soldier, Swagavulin
-from entities.cards import FragGrenade, NoScope360, FlashGrenade, HunkerDown, MedKit, RiotShield
+from entities.cards import FragGrenade, NoScope360, FlashGrenade, HunkerDown, MedKit, RiotShield, Ump45
 
 if not pg.font:
     print("Warning, fonts disabled")
@@ -56,7 +56,8 @@ def start_game():
             MedKit(),
             RiotShield(),
             RiotShield(),
-            RiotShield()
+            RiotShield(),
+            Ump45()
         ]
     )
     # 360noscope can end turn, so it needs the end turn function and it's arguments
