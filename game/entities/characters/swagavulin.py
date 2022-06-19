@@ -22,11 +22,17 @@ class Swagavulin(Character):
             'debuff by 3',
             '6x2 damage',
             '20 damage',
+            '10 damage',
+            '6x2 damage',
+            '20 damage',
+            '10 damage',
+            '6x2 damage',
+            '20 damage',
             '10 damage'
         ]
 
-        self.current_action = random.choice(self.actions)
-        self.intent = self.current_action # this changes if cahracter is buffer for example
+        self.current_action = '???' # Start by doing nothing
+        self.intent = self.current_action # This changes if cahracter is buffer for example
 
     def draw_extras(self, screen: pg.Surface):
         """Draw extras
@@ -41,9 +47,9 @@ class Swagavulin(Character):
             # Draw intent
             font = pg.font.Font(None, 48)
             color = (10,150,10) if self.current_action == 'debuff by 3' else (255,10,10)
-            color = (200,200,0) if self.current_action == '***' else color
+            color = (200,200,0) if self.current_action == '***' or self.current_action == '???' else color
             display_text = "{action} incoming".format(action=self.intent)
-            if self.current_action == '***':
+            if self.current_action == '***' or self.current_action == '???':
                 display_text = self.current_action
             text = font.render(display_text , True, color)
             screen.blit(text, self.intent_pos)
@@ -69,7 +75,7 @@ class Swagavulin(Character):
             case '10 damage':
                 target.receive_damage(10)
             case '***':
-                pass # we're stunned, do nothing
+                pass # We're stunned, do nothing
             case _:
                 pass # ???
 

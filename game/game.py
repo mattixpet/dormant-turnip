@@ -51,11 +51,10 @@ def start_game():
             FragGrenade(),
             FragGrenade(),
             FragGrenade(),
-            FlashGrenade(),
+            FragGrenade(),
             FlashGrenade(),
             HunkerDown(),
             MedKit(),
-            RiotShield(),
             RiotShield(),
             RiotShield(),
             Ump45()

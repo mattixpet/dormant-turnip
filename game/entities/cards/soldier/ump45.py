@@ -10,7 +10,7 @@ class Ump45(Card):
     The OP of the OP.
     """
     def __init__(self):
-        Card.__init__(self, 'ump45', damage=20, mana_cost=1, targeted=True, scale=0.2)
+        Card.__init__(self, 'ump45', damage=20, mana_cost=0, targeted=True, scale=0.2)
 
         self.title = "UMP45"
         self.text = """Damage: {dmg}
