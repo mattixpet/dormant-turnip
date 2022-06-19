@@ -67,9 +67,8 @@ class Deck(Entity):
         """
         for card in self.hand:
             if card.rect.collidepoint(pos):
-                discard = card.use(self.character, target)
-                # this conditional is a dirty fix because 360 card can end turn
-                if (discard != 'dont discard'):
+                was_played = card.use(self.character, target)
+                if (was_played):
                     self._discard_card(card)
 
     def add_card(self, card: Card):

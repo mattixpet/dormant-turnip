@@ -20,8 +20,12 @@ this turn to 25%.
 Mana cost: {mana}""".format(mana=self.mana_cost) 
 
     def use(self, user: Character, target: Character):
-        Card.use(self, user, target)
+        can_play = Card.use(self, user, target)
+        if not can_play:
+            return False
 
         user.add_buff('hunker_down')
         target.notify_buff('hunker_down')
+
+        return True
         

@@ -16,7 +16,7 @@ class NoScope360(Card):
         self.end_turn_callback = end_turn_callback
         self.end_turn_callback_args = end_turn_callback_args
 
-        self.whiff_damage = 5
+        self.whiff_damage = 0
         self.pow_damage = 150
 
         self.text = """10% {pow} damage
@@ -32,9 +32,16 @@ Mana cost: {mana}""".format(pow=self.pow_damage, whiff=self.whiff_damage, mana=s
         else:
             self.damage = self.whiff_damage
 
-        Card.use(self, user, target)
+        can_play = Card.use(self, user, target)
+        if not can_play:
+            return False
 
         if self.damage == self.whiff_damage:
             # We whiffed, end our turn
             self.end_turn_callback(*self.end_turn_callback_args)
-            return 'dont discard'
+            # Bit of a hack..
+            # trick the deck not to discard us by telling him we weren't played
+            # because we ended the turn
+            return False
+
+        return True

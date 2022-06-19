@@ -22,6 +22,9 @@ class Character(Entity):
 
         self.block = 0
 
+        self.max_mana = 3
+        self.mana = self.max_mana
+
     def receive_damage(self, amount: int):
         if 'hunker_down' in self.temporary_buffs:
             amount = round_number(amount * 0.25) # you happy Tumi? Round ekki floor
@@ -40,6 +43,7 @@ class Character(Entity):
         self.health_lost_last_turn = self.health_lost_this_turn
         self.health_lost_this_turn = 0
         self.block = 0 # Reset block every turn
+        self.mana = self.max_mana
 
     def add_buff(self, buff: str, value: int = 0):
         """Add buff
@@ -59,6 +63,17 @@ class Character(Entity):
 
     def heal(self, amount: int):
         self.health += amount
+
+    def use_mana(self, amount: int) -> bool:
+        """Use mana
+        Cards call this to let us know we used them so we can reduce our mana.
+
+        Returns True if we have enough mana to play the card otherwise False
+        """
+        if self.mana < amount:
+            return False
+        self.mana -= amount
+        return True
 
     def get_damage_last_turn(self):
         return self.health_lost_last_turn

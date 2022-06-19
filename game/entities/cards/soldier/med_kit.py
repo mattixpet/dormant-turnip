@@ -17,7 +17,11 @@ last turn.
 Mana cost: {mana}""".format(mana=self.mana_cost) 
 
     def use(self, user: Character, target: Character):
-        Card.use(self, user, target)
+        can_play = Card.use(self, user, target)
+        if not can_play:
+            return False
 
         user.heal(user.get_damage_last_turn())
+
+        return True
         

@@ -18,7 +18,11 @@ class RiotShield(Card):
 Mana cost: {mana}""".format(block=self.block, mana=self.mana_cost) 
 
     def use(self, user: Character, target: Character):
-        Card.use(self, user, target)
+        can_play = Card.use(self, user, target)
+        if not can_play:
+            return False
 
         user.add_buff('block', self.block)
+
+        return True
         
