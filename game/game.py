@@ -6,7 +6,7 @@ from tools.resources import load_image
 from mainloop import mainloop, end_turn
 from entities import Entity, Deck
 from entities.characters import Soldier, Swagavulin
-from entities.cards import FragGrenade, NoScope360, FlashGrenade, HunkerDown, MedKit
+from entities.cards import FragGrenade, NoScope360, FlashGrenade, HunkerDown, MedKit, RiotShield
 
 if not pg.font:
     print("Warning, fonts disabled")
@@ -53,15 +53,19 @@ def start_game():
             FlashGrenade(),
             FlashGrenade(),
             HunkerDown(),
-            MedKit()
+            MedKit(),
+            RiotShield(),
+            RiotShield(),
+            RiotShield()
         ]
     )
-    allsprites = pg.sprite.RenderPlain((soldier, swagavulin, deck, end_turn_button))
-
     # 360noscope can end turn, so it needs the end turn function and it's arguments
     # and manual adding here after deck is created
-    noscope360 = NoScope360(end_turn, [deck, swagavulin, soldier])
-    deck.add_card(noscope360)
+    deck.add_card(
+        NoScope360(end_turn, [deck, swagavulin, soldier])
+    )
+
+    allsprites = pg.sprite.RenderPlain((soldier, swagavulin, deck, end_turn_button))
 
     entities = {
         "end_turn_button": end_turn_button,

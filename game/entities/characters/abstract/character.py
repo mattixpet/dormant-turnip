@@ -12,14 +12,21 @@ class Character(Entity):
 
         self.health = health
         self.strength = 0
+        # Current buffs possible:
+        #     'hunker_down'
+        #     'block'
         self.temporary_buffs = [] # Buffs only valid for a turn
 
         self.health_lost_this_turn = 0
         self.health_lost_last_turn = 0
 
+        self.block = 0
+
     def receive_damage(self, amount: int):
         if 'hunker_down' in self.temporary_buffs:
             amount = round_number(amount * 0.25) # you happy Tumi? Round ekki floor
+        if 'block' in self.temporary_buffs:
+            amount = max(0, amount - self.block) # can't heal from block, so we max(0,..)
         self.health -= amount
         self.health_lost_this_turn += amount
 
@@ -30,9 +37,23 @@ class Character(Entity):
         self.temporary_buffs = []
         self.health_lost_last_turn = self.health_lost_this_turn
         self.health_lost_this_turn = 0
+        self.block = 0 # Reset block every turn
 
-    def add_buff(self, buff: str):
-        self.temporary_buffs.append(buff)
+    def add_buff(self, buff: str, value: int = 0):
+        """Add buff
+        `buff` is a name of buff. See possible buffs in __init__.
+        Optional `value` to come with the buff. E.g. block value.
+        """
+        if buff in self.temporary_buffs:
+            match buff:
+                case 'hunker_down':
+                    pass
+                case 'block':
+                    self.block += value
+        else:
+            if buff == 'block':
+                self.block += value
+            self.temporary_buffs.append(buff)
 
     def heal(self, amount: int):
         self.health += amount

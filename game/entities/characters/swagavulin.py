@@ -41,6 +41,7 @@ class Swagavulin(Character):
             # Draw intent
             font = pg.font.Font(None, 48)
             color = (10,150,10) if self.current_action == 'debuff by 3' else (255,10,10)
+            color = (200,200,0) if self.current_action == '***' else color
             display_text = "{action} incoming".format(action=self.intent)
             if self.current_action == '***':
                 display_text = self.current_action
