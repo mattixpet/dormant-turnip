@@ -17,6 +17,8 @@ class Deck(Entity):
         self.cards = cards.copy() # maintain a copy of our entire deck
 
         self.deck = cards
+        random.shuffle(self.deck)
+
         self.hand = []
         self.discard = []
 
@@ -65,6 +67,7 @@ class Deck(Entity):
         for card in self.hand:
             if card.rect.collidepoint(pos):
                 discard = card.use(target)
+                # this conditional is a dirty fix because 360 card can end turn
                 if (discard != 'dont discard'):
                     self._discard_card(card)
 
@@ -72,6 +75,7 @@ class Deck(Entity):
         """Add card
         """
         self.deck.append(card)
+        random.shuffle(self.deck)
 
     def _draw_card(self):
         """Draw card

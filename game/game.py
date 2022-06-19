@@ -6,7 +6,7 @@ from tools.resources import load_image
 from mainloop import mainloop, end_turn
 from entities import Entity, Deck
 from entities.characters import Soldier, Swagavulin
-from entities.cards import FragGrenade, NoScope360
+from entities.cards import FragGrenade, NoScope360, FlashGrenade
 
 if not pg.font:
     print("Warning, fonts disabled")
@@ -47,7 +47,9 @@ def start_game():
     deck = Deck([
         FragGrenade(soldier),
         FragGrenade(soldier),
-        FragGrenade(soldier)
+        FragGrenade(soldier),
+        FlashGrenade(soldier),
+        FlashGrenade(soldier)
     ])
     allsprites = pg.sprite.RenderPlain((soldier, swagavulin, deck, end_turn_button))
 

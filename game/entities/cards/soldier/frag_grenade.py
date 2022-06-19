@@ -11,5 +11,5 @@ class FragGrenade(Card):
         Card.__init__(self, 'frag_grenade', character, damage=7, mana_cost=1, targeted=True, scale=0.2)
 
         self.text = """Damage to all: {dmg}
-        Mana cost: {mana}""".format(dmg=self.damage, mana=self.mana_cost) 
+Mana cost: {mana}""".format(dmg=self.damage, mana=self.mana_cost) 
 

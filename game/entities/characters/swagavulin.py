@@ -16,6 +16,8 @@ class Swagavulin(Character):
         self.intent_pos = (840,100)
 
         # List of things Swagavulin can do to the character
+        # Note: This should be in a table somewhere to be references,
+        #       so that if we change the text it is reflected everywhere
         self.actions = [
             'debuff by 3',
             '6x2 damage',
@@ -38,7 +40,10 @@ class Swagavulin(Character):
             # Draw intent
             font = pg.font.Font(None, 48)
             color = (10,150,10) if self.current_action == 'debuff by 3' else (255,10,10)
-            text = font.render("{action} incoming".format(action=self.current_action), True, color)
+            display_text = "{action} incoming".format(action=self.current_action)
+            if self.current_action == '***':
+                display_text = self.current_action
+            text = font.render(display_text , True, color)
             screen.blit(text, self.intent_pos)
 
     def perform_action(self, target: Character) -> None:
@@ -60,5 +65,18 @@ class Swagavulin(Character):
                 target.receive_damage(20)
             case '10 damage':
                 target.receive_damage(10)
+            case '***':
+                pass # we're stunned, do nothing
+            case _:
+                pass # ???
+
 
         self.current_action = random.choice(self.actions)
+
+    def get_stunned(self):
+        """Get stunned
+        We're stunned! Lose our next action.
+
+        Note: This should probably be part of an "Enemy class" which inherits from Character.
+        """
+        self.current_action = '***'

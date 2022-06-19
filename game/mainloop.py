@@ -54,6 +54,8 @@ def mainloop(screen: pg.Surface, background: pg.Surface, allsprites: pg.sprite.G
         screen.blit(background, (0, 0))
         deck.draw_hand(screen)
         allsprites.draw(screen)
+        # Hack to draw text/health/stats of swagavulin and soldier
+        # Normally would be just one draw function for these
         swagavulin.draw_extras(screen)
         soldier.draw_extras(screen)
         pg.display.flip()
